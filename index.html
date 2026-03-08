@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>阿美語互動式教學入口</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['"Noto Sans TC"', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+    <style>
+        .accordion-content {
+            display: grid;
+            grid-template-rows: 0fr;
+            transition: grid-template-rows 0.3s ease-out;
+        }
+        .accordion-content.is-open {
+            grid-template-rows: 1fr;
+        }
+        .accordion-inner {
+            overflow: hidden;
+        }
+        .icon-rotate {
+            transition: transform 0.3s ease-out;
+        }
+        .is-open .icon-rotate {
+            transform: rotate(180deg);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen p-6 md:p-12">
+
+    <div class="max-w-4xl mx-auto">
+        <header class="text-center mb-12">
+            <h1 class="text-4xl font-bold text-slate-900 mb-4">阿美語互動式教學入口</h1>
+            <p class="text-lg text-slate-500">請依照下列步驟，依序完成本學期的學習與測驗</p>
+        </header>
+
+        <div class="space-y-4">
+
+            <!-- 1. 課程大綱 -->
+            <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden accordion-item is-open">
+                <button class="w-full px-6 py-5 flex items-center justify-between bg-white hover:bg-slate-50 transition-colors focus:outline-none" onclick="toggleAccordion(this)">
+                    <div class="flex items-center gap-4">
+                        <div class="flex-shrink-0 w-10 h-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-bold text-lg">1</div>
+                        <h2 class="text-xl font-bold text-slate-800 text-left">第一部分：詳閱課程大綱</h2>
+                    </div>
+                    <i class="fa-solid fa-chevron-down text-slate-400 icon-rotate"></i>
+                </button>
+                <div class="accordion-content is-open">
+                    <div class="accordion-inner px-6 pb-6 pt-2">
+                        <p class="text-slate-600 mb-6">了解核心學習目標、進度安排與評分標準。請務必在開學第一週詳閱並將其加入書籤。</p>
+                        <a href="https://docs.google.com/document/d/1CbnMwiNWxqNgrFrEWmPQGQSvuoPCmhIl/edit?usp=sharing&ouid=102869585637895291557&rtpof=true&sd=true" target="_blank" class="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-6 rounded-lg transition-colors w-full sm:w-auto justify-center">
+                            <i class="fa-solid fa-file-word"></i> 存取教學大綱
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. 教學簡報 -->
+            <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden accordion-item">
+                <button class="w-full px-6 py-5 flex items-center justify-between bg-white hover:bg-slate-50 transition-colors focus:outline-none" onclick="toggleAccordion(this)">
+                    <div class="flex items-center gap-4">
+                        <div class="flex-shrink-0 w-10 h-10 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center font-bold text-lg">2</div>
+                        <h2 class="text-xl font-bold text-slate-800 text-left">第二部分：預覽教學簡報</h2>
+                    </div>
+                    <i class="fa-solid fa-chevron-down text-slate-400 icon-rotate"></i>
+                </button>
+                <div class="accordion-content">
+                    <div class="accordion-inner px-6 pb-6 pt-2">
+                        <p class="text-slate-600 mb-6">瀏覽每週課堂使用的簡報與視覺輔助教材。簡報檔案會自動同步至最新版本。</p>
+                        <a href="https://drive.google.com/file/d/1IVsWo7bs09rRIY1ENrkSDyPA8C8GPU5p/view?usp=sharing" target="_blank" class="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white font-medium py-3 px-6 rounded-lg transition-colors w-full sm:w-auto justify-center">
+                            <i class="fa-brands fa-google-drive"></i> 開啟教學簡報
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. 資源下載 -->
+            <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden accordion-item">
+                <button class="w-full px-6 py-5 flex items-center justify-between bg-white hover:bg-slate-50 transition-colors focus:outline-none" onclick="toggleAccordion(this)">
+                    <div class="flex items-center gap-4">
+                        <div class="flex-shrink-0 w-10 h-10 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center font-bold text-lg">3</div>
+                        <h2 class="text-xl font-bold text-slate-800 text-left">第三部分：課文與資源下載</h2>
+                    </div>
+                    <i class="fa-solid fa-chevron-down text-slate-400 icon-rotate"></i>
+                </button>
+                <div class="accordion-content">
+                    <div class="accordion-inner px-6 pb-6 pt-2">
+                        
+                        <!-- 國中版教材 -->
+                        <h3 class="text-lg font-bold text-slate-700 mb-3 flex items-center gap-2"><i class="fa-solid fa-book-open text-purple-500"></i> 國中版教材</h3>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 mb-6">
+                            <a href="https://drive.google.com/file/d/1nTLtSCDTTBhdfahRbgoNzLVpKk1BsEhB/view?usp=sharing" target="_blank" class="p-3 rounded-lg bg-slate-50 border border-slate-200 hover:border-purple-300 hover:bg-purple-50 transition-colors flex items-center gap-3">
+                                <i class="fa-solid fa-language text-purple-500 text-xl"></i>
+                                <span class="font-bold text-slate-700 text-sm">秀姑巒阿美</span>
+                            </a>
+                            <a href="https://drive.google.com/file/d/1PP3ih9UCPf3-yf6wHJosKIJagutTiuG3/view?usp=sharing" target="_blank" class="p-3 rounded-lg bg-slate-50 border border-slate-200 hover:border-purple-300 hover:bg-purple-50 transition-colors flex items-center gap-3">
+                                <i class="fa-solid fa-language text-purple-500 text-xl"></i>
+                                <span class="font-bold text-slate-700 text-sm">南勢阿美</span>
+                            </a>
+                            <a href="https://drive.google.com/file/d/1s_zCyVLGXp7mYI4M8B9Zz-7WwuI3AMbs/view?usp=sharing" target="_blank" class="p-3 rounded-lg bg-slate-50 border border-slate-200 hover:border-purple-300 hover:bg-purple-50 transition-colors flex items-center gap-3">
+                                <i class="fa-solid fa-language text-purple-500 text-xl"></i>
+                                <span class="font-bold text-slate-700 text-sm">海岸阿美</span>
+                            </a>
+                            <a href="https://drive.google.com/file/d/1tdLhfn49EjWwq551lYEvoB5o36o-NLtf/view?usp=sharing" target="_blank" class="p-3 rounded-lg bg-slate-50 border border-slate-200 hover:border-purple-300 hover:bg-purple-50 transition-colors flex items-center gap-3">
+                                <i class="fa-solid fa-language text-purple-500 text-xl"></i>
+                                <span class="font-bold text-slate-700 text-sm">馬蘭阿美</span>
+                            </a>
+                            <a href="https://drive.google.com/file/d/1smGZHnel0nY3g-hC0fNpl-3x62KE-ZjN/view?usp=sharing" target="_blank" class="p-3 rounded-lg bg-slate-50 border border-slate-200 hover:border-purple-300 hover:bg-purple-50 transition-colors flex items-center gap-3">
+                                <i class="fa-solid fa-language text-purple-500 text-xl"></i>
+                                <span class="font-bold text-slate-700 text-sm">恆春阿美</span>
+                            </a>
+                        </div>
+
+                        <!-- 學習詞表 -->
+                        <h3 class="text-lg font-bold text-slate-700 mb-3 flex items-center gap-2"><i class="fa-solid fa-table-list text-emerald-500"></i> 學習詞表</h3>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 mb-6">
+                            <a href="https://docs.google.com/spreadsheets/d/1p-bKcSSyL2PjBOtd0d-ga212u9ZQoqvH/edit?usp=sharing&ouid=102869585637895291557&rtpof=true&sd=true" target="_blank" class="p-3 rounded-lg bg-slate-50 border border-slate-200 hover:border-emerald-300 hover:bg-emerald-50 transition-colors flex items-center gap-3">
+                                <i class="fa-solid fa-file-excel text-emerald-500 text-xl"></i>
+                                <span class="font-bold text-slate-700 text-sm">秀姑巒阿美</span>
+                            </a>
+                            <a href="https://docs.google.com/spreadsheets/d/1soYY8rHq4O8HXiXcHaVpArrKJVzVuz7m/edit?usp=sharing&ouid=102869585637895291557&rtpof=true&sd=true" target="_blank" class="p-3 rounded-lg bg-slate-50 border border-slate-200 hover:border-emerald-300 hover:bg-emerald-50 transition-colors flex items-center gap-3">
+                                <i class="fa-solid fa-file-excel text-emerald-500 text-xl"></i>
+                                <span class="font-bold text-slate-700 text-sm">南勢阿美</span>
+                            </a>
+                            <a href="https://docs.google.com/spreadsheets/d/1Q205eD_oLq_Kz-91M0JwsQbFBOThQupu/edit?usp=sharing&ouid=102869585637895291557&rtpof=true&sd=true" target="_blank" class="p-3 rounded-lg bg-slate-50 border border-slate-200 hover:border-emerald-300 hover:bg-emerald-50 transition-colors flex items-center gap-3">
+                                <i class="fa-solid fa-file-excel text-emerald-500 text-xl"></i>
+                                <span class="font-bold text-slate-700 text-sm">海岸阿美</span>
+                            </a>
+                            <a href="https://docs.google.com/spreadsheets/d/15DuDgXGHKHm7o2HCuf-OmSsFW1Dtb3FB/edit?usp=sharing&ouid=102869585637895291557&rtpof=true&sd=true" target="_blank" class="p-3 rounded-lg bg-slate-50 border border-slate-200 hover:border-emerald-300 hover:bg-emerald-50 transition-colors flex items-center gap-3">
+                                <i class="fa-solid fa-file-excel text-emerald-500 text-xl"></i>
+                                <span class="font-bold text-slate-700 text-sm">馬蘭阿美</span>
+                            </a>
+                            <a href="https://docs.google.com/spreadsheets/d/1iM7ZLoqtRxcTSbC4CL7jTbJikI9Gugt7/edit?usp=sharing&ouid=102869585637895291557&rtpof=true&sd=true" target="_blank" class="p-3 rounded-lg bg-slate-50 border border-slate-200 hover:border-emerald-300 hover:bg-emerald-50 transition-colors flex items-center gap-3">
+                                <i class="fa-solid fa-file-excel text-emerald-500 text-xl"></i>
+                                <span class="font-bold text-slate-700 text-sm">恆春阿美</span>
+                            </a>
+                        </div>
+
+                        <!-- 書寫系統沿革 -->
+                        <h3 class="text-lg font-bold text-slate-700 mb-3 flex items-center gap-2"><i class="fa-solid fa-scroll text-amber-500"></i> 原住民族書寫系統沿革</h3>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-2">
+                            <a href="https://drive.google.com/file/d/19FEMguUEHb7VdurPyGBkscosbrxAlvVE/view?usp=sharing" target="_blank" class="p-3 rounded-lg bg-slate-50 border border-slate-200 hover:border-amber-300 hover:bg-amber-50 transition-colors flex items-center gap-3">
+                                <i class="fa-solid fa-file-pdf text-amber-500 text-xl"></i>
+                                <span class="font-bold text-slate-700 text-sm">書寫系統沿革 (一)</span>
+                            </a>
+                            <a href="https://drive.google.com/file/d/1D9ZqmNcrHIjEnbaITTd_CbpYV7G1yXuI/view?usp=sharing" target="_blank" class="p-3 rounded-lg bg-slate-50 border border-slate-200 hover:border-amber-300 hover:bg-amber-50 transition-colors flex items-center gap-3">
+                                <i class="fa-solid fa-file-pdf text-amber-500 text-xl"></i>
+                                <span class="font-bold text-slate-700 text-sm">書寫系統沿革 (二)</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4. 課後作業 -->
+            <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden accordion-item">
+                <button class="w-full px-6 py-5 flex items-center justify-between bg-white hover:bg-slate-50 transition-colors focus:outline-none" onclick="toggleAccordion(this)">
+                    <div class="flex items-center gap-4">
+                        <div class="flex-shrink-0 w-10 h-10 rounded-full bg-rose-100 text-rose-600 flex items-center justify-center font-bold text-lg">4</div>
+                        <h2 class="text-xl font-bold text-slate-800 text-left">第四部分：課後作業</h2>
+                    </div>
+                    <i class="fa-solid fa-chevron-down text-slate-400 icon-rotate"></i>
+                </button>
+                <div class="accordion-content">
+                    <div class="accordion-inner px-6 pb-6 pt-2">
+                        <div class="bg-rose-50 p-5 rounded-xl border border-rose-100 flex flex-col md:flex-row items-center justify-between gap-4">
+                            <div>
+                                <h3 class="font-bold text-slate-800 text-lg">族語 E 樂園線上練習</h3>
+                                <p class="text-rose-600 text-sm mt-1">基本詞彙：數字、代名詞 / 指示詞、疑問詞</p>
+                            </div>
+                            <a href="https://forms.gle/DFtVta1z71aN7Ym79" target="_blank" class="shrink-0 bg-rose-600 hover:bg-rose-700 text-white font-medium py-2.5 px-6 rounded-lg transition-colors w-full md:w-auto text-center shadow-sm">
+                                <i class="fa-solid fa-pen mr-2"></i> 前往測驗
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        function toggleAccordion(button) {
+            const currentItem = button.closest('.accordion-item');
+            const currentContent = currentItem.querySelector('.accordion-content');
+            
+            // Toggle classes
+            currentItem.classList.toggle('is-open');
+            currentContent.classList.toggle('is-open');
+        }
+    </script>
+</body>
+</html>
