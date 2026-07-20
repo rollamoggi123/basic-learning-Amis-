@@ -36,9 +36,96 @@
         .is-open .icon-rotate {
             transform: rotate(180deg);
         }
+        body.site-locked > :not(#site-password-gate) {
+            display: none !important;
+        }
+        #site-password-gate {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            background: #0f172a;
+            color: #0f172a;
+            font-family: "Noto Sans TC", sans-serif;
+        }
+        #site-password-gate.is-hidden {
+            display: none;
+        }
+        .password-card {
+            width: min(100%, 440px);
+            background: #ffffff;
+            border: 4px solid #f59e0b;
+            border-radius: 28px;
+            padding: 32px;
+            box-shadow: 0 24px 60px rgba(0,0,0,.35);
+            text-align: center;
+        }
+        .password-card h1 {
+            margin: 0 0 12px;
+            font-size: clamp(28px, 7vw, 40px);
+            font-weight: 900;
+            color: #0f172a;
+            line-height: 1.2;
+        }
+        .password-card p {
+            margin: 0 0 22px;
+            color: #475569;
+            font-weight: 700;
+            line-height: 1.7;
+        }
+        .password-card input {
+            width: 100%;
+            border: 4px solid #0f172a;
+            border-radius: 18px;
+            padding: 15px 18px;
+            text-align: center;
+            font-size: 20px;
+            font-weight: 800;
+            outline: none;
+        }
+        .password-card input:focus {
+            border-color: #f59e0b;
+        }
+        .password-card button {
+            width: 100%;
+            margin-top: 14px;
+            border: 4px solid #0f172a;
+            border-radius: 18px;
+            padding: 15px 18px;
+            background: #fbbf24;
+            color: #0f172a;
+            font-size: 20px;
+            font-weight: 900;
+            cursor: pointer;
+            box-shadow: 4px 4px 0 #0f172a;
+        }
+        .password-card button:active {
+            transform: translate(4px, 4px);
+            box-shadow: none;
+        }
+        #password-error {
+            min-height: 24px;
+            margin-top: 12px;
+            color: #dc2626;
+            font-weight: 900;
+        }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800 min-h-screen p-6 md:p-12">
+<body class="site-locked bg-slate-50 text-slate-800 min-h-screen p-6 md:p-12">
+
+    <div id="site-password-gate" role="dialog" aria-modal="true" aria-labelledby="password-title">
+        <form class="password-card" id="password-form">
+            <div style="font-size:52px;margin-bottom:12px;">🔒</div>
+            <h1 id="password-title">網站目前未開放</h1>
+            <p>阿美族語基礎班課程網站目前暫不開放進入。請輸入老師提供的密碼。</p>
+            <input id="site-password-input" type="password" placeholder="請輸入密碼" autocomplete="current-password" autofocus>
+            <button type="submit">進入網站</button>
+            <div id="password-error" aria-live="polite"></div>
+        </form>
+    </div>
 
     <div class="max-w-4xl mx-auto">
         <!-- 頁首：課程與教師資訊 -->
@@ -559,6 +646,49 @@
             currentItem.classList.toggle('is-open');
             currentContent.classList.toggle('is-open');
         }
+    </script>
+    <script>
+        (function () {
+            const SITE_PASSWORD = '0901';
+            const STORAGE_KEY = 'basic-learning-amis-unlocked';
+            const body = document.body;
+            const gate = document.getElementById('site-password-gate');
+            const form = document.getElementById('password-form');
+            const input = document.getElementById('site-password-input');
+            const error = document.getElementById('password-error');
+
+            function unlockSite() {
+                body.classList.remove('site-locked');
+                if (gate) gate.classList.add('is-hidden');
+            }
+
+            try {
+                if (localStorage.getItem(STORAGE_KEY) === 'true') {
+                    unlockSite();
+                    return;
+                }
+            } catch (e) {
+                // Continue without persistent unlock if storage is unavailable.
+            }
+
+            if (form && input && error) {
+                form.addEventListener('submit', function (event) {
+                    event.preventDefault();
+                    if (input.value.trim() === SITE_PASSWORD) {
+                        try {
+                            localStorage.setItem(STORAGE_KEY, 'true');
+                        } catch (e) {
+                            // Ignore storage errors and unlock for this page view.
+                        }
+                        unlockSite();
+                        return;
+                    }
+                    error.textContent = '密碼錯誤，目前網站尚未開放。';
+                    input.value = '';
+                    input.focus();
+                });
+            }
+        })();
     </script>
 </body>
 </html>
